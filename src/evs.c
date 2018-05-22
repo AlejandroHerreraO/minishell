@@ -6,29 +6,31 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 01:54:27 by aherrera          #+#    #+#             */
-/*   Updated: 2018/05/19 02:16:43 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:36:07 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libms.h"
 
-void		ev_make(void)
+void		ev_make(int ac, char **av, char **env)
 {
 	int		i;
 	char	**new_en;
 
+	(void)ac;
+	(void)av;
 	i = 0;
-	while (environ[i])
+	while (env[i])
 		i++;
 	new_en = (char **)malloc((i + 1) * sizeof(char *));
 	new_en[i] = NULL;
 	i = 0;
-	while (environ[i])
+	while (env[i])
 	{
-		new_en[i] = ft_strdup(environ[i]);
+		new_en[i] = ft_strdup(env[i]);
 		i++;
 	}
-	environ = new_en;
+	g_environ = new_en;
 }
 
 void		ev_modi(char *var, char *val)
@@ -37,20 +39,20 @@ void		ev_modi(char *var, char *val)
 	char	*tmp;
 
 	i = 0;
-	while (environ[i])
+	while (g_environ[i])
 	{
-		if (!ft_strncmp(environ[i], var, ft_strlen(var)))
+		if (!ft_strncmp(g_environ[i], var, ft_strlen(var)))
 			break ;
 		i++;
 	}
-	if (!environ[i])
+	if (!g_environ[i])
 		ev_addn(var, val);
 	else
 	{
 		tmp = ft_strjoin(var, "=");
 		ft_strcomb(&tmp, val, 0, ft_strlen(val));
-		ft_strdel(&environ[i]);
-		environ[i] = tmp;
+		ft_strdel(&g_environ[i]);
+		g_environ[i] = tmp;
 	}
 }
 
@@ -61,41 +63,40 @@ void		ev_addn(char *var, char *val)
 	char	*tmp;
 
 	i = 0;
-	while (environ[i])
+	while (g_environ[i])
 		i++;
 	new_en = (char **)malloc((i + 2) * sizeof(char *));
 	new_en[i + 1] = NULL;
 	i = 0;
-	while (environ[i])
+	while (g_environ[i])
 	{
-		new_en[i] = ft_strdup(environ[i]);
+		new_en[i] = ft_strdup(g_environ[i]);
 		i++;
 	}
 	tmp = ft_strjoin(var, "=");
 	ft_strcomb(&tmp, val, 0, ft_strlen(val));
 	new_en[i] = tmp;
-	dst_av(environ);
-	free(environ);
-	environ = new_en;
+	dst_av(g_environ);
+	free(g_environ);
+	g_environ = new_en;
 }
 
 void		ev_remv(char *var)
 {
 	int		i;
-	char	*aux;
 
 	i = 0;
-	while (environ[i])
+	while (g_environ[i])
 	{
-		if (!ft_strncmp(environ[i], var, ft_strlen(var)))
+		if (!ft_strncmp(g_environ[i], var, ft_strlen(var)))
 		{
-			aux = environ[i];
-			while (environ[i])
+			ft_strdel(&g_environ[i]);
+			while (g_environ[i + 1])
 			{
-				environ[i] = environ[i + 1];
+				g_environ[i] = g_environ[i + 1];
 				i++;
 			}
-			ft_strdel(&aux);
+			g_environ[i] = NULL;
 			return ;
 		}
 		i++;
@@ -107,10 +108,10 @@ void		ev_dest(void)
 	int i;
 
 	i = 0;
-	while (environ[i])
+	while (g_environ[i])
 	{
-		ft_strdel(&environ[i]);
+		ft_strdel(&g_environ[i]);
 		i++;
 	}
-	free(environ);
+	free(g_environ);
 }

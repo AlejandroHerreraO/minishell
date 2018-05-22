@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:49:09 by aherrera          #+#    #+#             */
-/*   Updated: 2018/05/19 02:27:39 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:44:46 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	create_fork(char *path, char **av)
 	status = 0;
 	pid = fork();
 	if (pid == 0)
-		execve(path, av, environ);
+		execve(path, av, g_environ);
 	else
 		wait(&status);
 }
@@ -94,15 +94,17 @@ static int	command(char *line, char **prev)
 		return (setenv_c(line));
 	if (!ft_strncmp(line, "unsetenv", 8) && (line[8] == ' ' || line[8] == 0))
 		return (unsetenv_c(line));
+	if (!ft_strncmp(line, "env", 3) && (line[3] == ' ' || line[3] == 0))
+		return (env_c());
 	return (0);
 }
 
-int			main(void)
+int			main(int ac, char **av, char **env)
 {
 	char	*line;
 	char	*prev;
 
-	ev_make();
+	ev_make(ac, av, env);
 	line = NULL;
 	prev = getcwd(NULL, 0);
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 01:55:02 by aherrera          #+#    #+#             */
-/*   Updated: 2018/05/19 02:17:05 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:29:22 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		echo(char *s)
 
 	line = NULL;
 	ch_get(s, &line, 4);
+	check_env(&line, 0, -1);
 	ft_putendl(line);
 	ft_strdel(&line);
 	return (1);

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_iswhitespacestr.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/20 13:48:40 by aherrera          #+#    #+#             */
-/*   Updated: 2018/05/22 12:35:32 by aherrera         ###   ########.fr       */
+/*   Created: 2018/05/21 22:27:59 by aherrera          #+#    #+#             */
+/*   Updated: 2018/05/21 22:28:33 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+int			ft_iswhitespacestr(char *s)
 {
-	if (ft_isdigit(c) || ft_isalpha(c))
-		return (1);
-	if (c == '_' || c== '/' || c == ':' || c == '=')
-		return (1);
-	return (0);
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if ((s[i] < 9 || s[i] > 13) && s[i] != 32)
+			return (0);
+		i++;
+	}
+	return (1);
 }

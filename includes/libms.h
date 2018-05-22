@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:04:14 by aherrera          #+#    #+#             */
-/*   Updated: 2018/05/19 02:34:08 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:03:51 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-extern char			**environ;
+char				**g_environ;
 
 typedef struct		s_chars
 {
@@ -39,10 +39,12 @@ char				*ev_find(char *var);
 void				dst_av(char **st);
 int					ft_iswhitespace(char c);
 int					ft_iswhitespacestr(char *s);
-void				ev_make(void);
+void				ev_make(int ac, char **av, char **env);
 void				ev_modi(char *var, char *val);
 void				ev_addn(char *var, char *val);
 void				ev_remv(char *var);
 void				ev_dst(void);
+int					env_c(void);
+void				check_env(char **l, int i, int j);
 
 #endif

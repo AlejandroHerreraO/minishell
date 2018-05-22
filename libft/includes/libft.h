@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:14:24 by aherrera          #+#    #+#             */
-/*   Updated: 2018/05/19 02:29:13 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:05:36 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ int							ft_diff(int a, int b);
 int							ft_small(int a, int b);
 char						*ft_utoa(t_ull n, t_ull b, char x, int l);
 void						ft_strcomb(char **st, char *s, int order, int n);
+int							ft_iswhitespacestr(char *s);
 
 #endif

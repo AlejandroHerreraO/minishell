@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:14:24 by aherrera          #+#    #+#             */
-/*   Updated: 2018/05/19 02:30:21 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:06:10 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void						ft_putstr(char const *s);
 void						ft_putwstr(wchar_t *s, int i);
 void						ft_putendl(char const *s);
 int							ft_iswhitespace(char c);
+int							ft_iswhitespacestr(char *s);
 void						ft_putnbr(int n);
 void						ft_putchar_fd(char c, int fd);
 void						ft_putstr_fd(char const *s, int fd);

@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 20:48:52 by aherrera          #+#    #+#             */
-/*   Updated: 2018/05/18 20:48:53 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:24:30 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,17 @@ void	ch_dst(t_chars **cs)
 		ch_dst(&((*cs)->next));
 	free(*cs);
 	cs = NULL;
+}
+
+int		env_c(void)
+{
+	int i;
+
+	i = 0;
+	while (g_environ[i])
+	{
+		ft_putendl(g_environ[i]);
+		i++;
+	}
+	return (1);
 }
